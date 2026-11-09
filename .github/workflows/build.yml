@@ -21,6 +21,7 @@ jobs:
           docker run --rm -v "$PWD:/work" -w /work fedora:45 bash -lc '
             set -eu
             dnf -y install rpmdevtools
+            dnf -y builddep kdrive-unofficial.spec
             ./build-srpm.sh
           '
 

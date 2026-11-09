@@ -82,12 +82,8 @@ jobs:
           docker run --rm -e LANG=C.UTF-8 -v "$PWD:/work" -w /work fedora:45 \
             bash -lc '
               set -eu
-              dnf -y install rpmdevtools cmake gcc-c++ gettext make ninja-build \
-                  pkgconf-pkg-config qt6-qtbase-devel qt6-qt5compat-devel \
-                  qt6-qtsvg-devel qt6-linguist qt6-qttools-devel poco-devel \
-                  xxhash-devel libzip-devel sqlite-devel openssl-devel \
-                  libsecret-devel libuuid-devel zlib-devel kf6-filesystem \
-                  shared-mime-info desktop-file-utils libappstream-glib
+              dnf -y install rpmdevtools
+              dnf -y builddep kdrive-unofficial.spec
               ./build-srpm.sh
               srpm=$(ls -t srpms/*.src.rpm | head -n1)
               rpmbuild --rebuild --define "_rpmdir /work/rpms" "$srpm"
