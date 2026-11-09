@@ -1,9 +1,11 @@
 # Anfrage an Infomaniak (Marke und Logo)
 
-Status: Entwurf, noch nicht abgeschickt.
+Status: **abgeschickt am 2026-11-09.**
+Frist: **2026-11-23** (14 Tage). Antwort oder Fristablauf entscheidet über
+die Veröffentlichung im COPR.
+
 Ziel: Einverständnis für Name „kDrive“ und die mitgelieferten App-Icons in
-einem inoffiziellen Fedora-Paket. Antwort oder Frist (14 Tage) entscheidet
-über die Veröffentlichung im COPR.
+einem inoffiziellen Fedora-Paket.
 
 ---
 
