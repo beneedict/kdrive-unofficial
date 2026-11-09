@@ -27,6 +27,7 @@ Erweiterung (`gnome-shell-extension-appindicator`).
 | `log4cplus` 2.1.2 privat mit `UNICODE=ON` gebaut | Fedoras `log4cplus` ist ohne Unicode gebaut, kDrive protokolliert aber Wide-Strings |
 | Sentry ersetzt durch eine No-Op-Bibliothek (`sentry-stub/`) | kein Absturzbericht an Infomaniak, kein `sentry-native`/Crashpad im Paket |
 | Matomo-Nutzungsstatistik abgeschaltet | keine Daten an `analytics.infomaniak.com` |
+| Update-Prüfung abgeschaltet (`0005`) | keine Abfrage des Infomaniak-Endpunkts, kein Hinweis auf eine AppImage; Updates kommen aus COPR via `dnf upgrade` |
 | Autostart-Eintrag zeigt auf `kdrive-unofficial_client` statt auf eine AppImage | funktioniert ohne AppImage |
 | Desktop-Datei, Icon und AppStream-Metainfo unter `/usr/share` | Integration in GNOME Software und das App-Grid |
 

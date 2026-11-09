@@ -1,0 +1,21 @@
+--- a/src/server/updater/abstractupdater.cpp	2026-09-28 15:36:42.000000000 +0200
++++ b/src/server/updater/abstractupdater.cpp	2026-11-10 00:00:20.971108124 +0100
+@@ -37,8 +37,18 @@
+ }
+ 
+ ExitCode AbstractUpdater::checkUpdateAvailable(const DistributionChannel currentChannel, UniqueId *id /*= nullptr*/) {
++#if defined(KD_LINUX)
++    // Fedora package: updates are delivered by the package manager (dnf),
++    // so the Infomaniak update endpoint is never contacted and no AppImage
++    // download is offered.
++    (void) currentChannel;
++    (void) id;
++    setState(UpdateState::UpToDate);
++    return ExitCode::Ok;
++#else
+     setState(UpdateState::Checking);
+     return _versionRetriever->retrieveVersion(currentChannel, id);
++#endif
+ }
+ 
+ void AbstractUpdater::setStateChangeCallback(const std::function<void(UpdateState)> &stateChangeCallback) {

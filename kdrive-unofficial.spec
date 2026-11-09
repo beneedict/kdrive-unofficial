@@ -2,7 +2,7 @@
 %global         _hardened_build 1
 
 Name:           kdrive-unofficial
-Version:        3.8.7
+Version:        3.8.8
 Release:        1%{?dist}
 Summary:        Unofficial build of the Infomaniak kDrive desktop sync client
 License:        GPL-3.0-or-later AND MIT AND Apache-2.0 AND BSD-2-Clause
@@ -25,6 +25,7 @@ Patch0:         0001-sentry-stub.patch
 Patch1:         0002-disable-matomo.patch
 Patch2:         0003-autostart-without-appimage.patch
 Patch3:         0004-relax-sqlite-version.patch
+Patch4:         0005-package-managed-updates.patch
 
 # kDrive is built from source against the Qt 6 packages of Fedora
 BuildRequires:  cmake
@@ -151,8 +152,12 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/io.github.bene
 %{_datadir}/kDrive_client
 
 %changelog
+* Tue Nov 10 2026 Benedikt Nimmervoll <beneedict@users.noreply.github.com> - 3.8.8-1
+- Update to kDrive 3.8.8.1.
+- New patch: no update check against Infomaniak, updates are delivered by dnf.
 * Mon Nov 09 2026 Benedikt Nimmervoll <beneedict@users.noreply.github.com> - 3.8.7-1
 - Initial package for kDrive 3.8.7.
 - Build against the Fedora system libraries.
 - Sentry stub instead of sentry-native, Matomo tracking disabled.
 - Autostart entry fixed for non-AppImage installations.
+- Update check replaced by package-managed updates (dnf).
