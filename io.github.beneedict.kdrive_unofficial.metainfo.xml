@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.beneedict.kdrive_unofficial</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>kDrive (unofficial)</name>
+  <summary>Unofficial build of the Infomaniak kDrive desktop sync client</summary>
+  <developer id="com.infomaniak">
+    <name>Infomaniak Network SA</name>
+  </developer>
+  <description>
+    <p>
+      kDrive Desktop synchronises files between the local computer and the
+      kDrive cloud storage of Infomaniak.  This package is an unofficial
+      build for Fedora and is not supported by Infomaniak.
+    </p>
+    <p>
+      kDrive is a trademark of Infomaniak Network SA.  This build is
+      distributed under the terms of the GNU General Public License version 3
+      or later.
+    </p>
+  </description>
+  <launchable type="desktop-id">kDrive_client.desktop</launchable>
+  <url type="homepage">https://github.com/Infomaniak/desktop-kDrive</url>
+  <url type="bugtracker">https://github.com/beneedict/kdrive-unofficial/issues</url>
+  <url type="vcs-browser">https://github.com/beneedict/kdrive-unofficial</url>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://raw.githubusercontent.com/beneedict/kdrive-unofficial/main/screenshot.png</image>
+      <caption>The kDrive main window</caption>
+    </screenshot>
+  </screenshots>
+  <categories>
+    <category>Network</category>
+    <category>FileTransfer</category>
+  </categories>
+  <releases>
+    <release version="3.8.7" date="2026-09-29"/>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>

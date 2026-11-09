@@ -1,0 +1,27 @@
+--- a/src/libcommonserver/utility/utility_linux.cpp	2026-09-03 10:41:42.000000000 +0200
++++ b/src/libcommonserver/utility/utility_linux.cpp	2026-11-09 21:12:58.109997795 +0100
+@@ -223,12 +223,22 @@
+         }
+         const SyncPath appimageDir{CommonUtility::envVarValue("APPIMAGE")};
+         LOGW_DEBUG(logger(), L"APPIMAGE: " << Utility::formatSyncPath(appimageDir));
++        // In an AppImage the client is started through the AppImage file itself.  In a
++        // regular installation (RPM, DEB, ...) there is no AppImage, so the Exec key must
++        // point at the installed client executable, otherwise the autostart entry is
++        // broken.
++        QString execPath;
++        if (appimageDir.empty()) {
++            execPath = QStringLiteral(APPLICATION_CLIENT_EXECUTABLE);
++        } else {
++            execPath = QString::fromStdString(appimageDir.native());
++        }
+         autoStartFile << "[Desktop Entry]" << std::endl;
+         autoStartFile << "Name=" << guiName << std::endl;
+         autoStartFile << "GenericName=File Synchronizer" << std::endl;
+-        autoStartFile << "Exec=" << "'" << appimageDir.native() << "'" << std::endl;
++        autoStartFile << "Exec=" << execPath.toStdString() << std::endl;
+         autoStartFile << "Terminal=false" << std::endl;
+-        autoStartFile << "Icon=" << CommonUtility::toLower(appName) << std::endl;
++        autoStartFile << "Icon=" << APPLICATION_ICON_NAME << std::endl;
+         autoStartFile << "Categories=Network" << std::endl;
+         autoStartFile << "Type=Application" << std::endl;
+         autoStartFile << "StartupNotify=false" << std::endl;

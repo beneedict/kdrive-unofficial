@@ -1,0 +1,121 @@
+name: Update to latest kDrive release
+
+# Weekly check for a new upstream Linux release tag (plain 3.x.y / 4.x.y
+# tags; the Windows/macOS tags w-* and m-* are ignored).
+#
+# The new version is built in a Fedora container first:
+#   * build ok  -> normal pull request, ready to merge
+#   * build fail-> draft pull request with the log, so the patches can be
+#                  rebased before anything reaches COPR
+# Merging the pull request triggers the COPR webhook (if configured).
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determine latest Linux release tag
+        id: latest
+        run: |
+          set -eu
+          tag=$(git ls-remote --tags --refs https://github.com/Infomaniak/desktop-kDrive.git \
+                | awk -F/ '{print $NF}' \
+                | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' \
+                | sort -V | tail -n1)
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "Latest Linux tag: $tag"
+
+      - name: Compare with spec version
+        id: cmp
+        run: |
+          set -eu
+          current=$(sed -n 's/^Version:[[:space:]]*//p' kdrive-unofficial.spec)
+          latest='${{ steps.latest.outputs.tag }}'
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          if [ "$current" = "$latest" ]; then
+              echo "update=no" >> "$GITHUB_OUTPUT"
+          else
+              echo "update=yes" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update spec file
+        if: steps.cmp.outputs.update == 'yes'
+        run: |
+          set -eu
+          latest='${{ steps.latest.outputs.tag }}'
+          sed -i "s/^Version:.*/Version:        $latest/" kdrive-unofficial.spec
+          sed -i "s/^Release:.*/Release:        1%{?dist}/" kdrive-unofficial.spec
+          sed -i "s|<release version=\"[0-9.]*\" date=\"[0-9-]*\"/>|<release version=\"$latest\"/>|" \
+              io.github.beneedict.kdrive_unofficial.metainfo.xml
+          python3 - "$latest" <<'PY'
+          import datetime
+          import sys
+
+          latest = sys.argv[1]
+          path = "kdrive-unofficial.spec"
+          spec = open(path).read()
+          entry = (
+              f"* {datetime.date.today():%a %b %d %Y} Benedikt Nimmervoll "
+              f"<beneedict@users.noreply.github.com> - {latest}-1\n"
+              f"- Update to kDrive {latest}.\n"
+          )
+          spec = spec.replace("%changelog\n", "%changelog\n" + entry, 1)
+          open(path, "w").write(spec)
+          PY
+
+      - name: Build test in Fedora 45
+        id: build
+        if: steps.cmp.outputs.update == 'yes'
+        continue-on-error: true
+        run: |
+          set -eu
+          docker run --rm -e LANG=C.UTF-8 -v "$PWD:/work" -w /work fedora:45 \
+            bash -lc '
+              set -eu
+              dnf -y install rpmdevtools cmake gcc-c++ gettext make ninja-build \
+                  pkgconf-pkg-config qt6-qtbase-devel qt6-qt5compat-devel \
+                  qt6-qtsvg-devel qt6-linguist qt6-qttools-devel poco-devel \
+                  xxhash-devel libzip-devel sqlite-devel openssl-devel \
+                  libsecret-devel libuuid-devel zlib-devel kf6-filesystem \
+                  shared-mime-info desktop-file-utils libappstream-glib
+              ./build-srpm.sh
+              srpm=$(ls -t srpms/*.src.rpm | head -n1)
+              rpmbuild --rebuild --define "_rpmdir /work/rpms" "$srpm"
+            ' 2>&1 | tee build.log
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Open pull request
+        if: steps.cmp.outputs.update == 'yes'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "Update to kDrive ${{ steps.latest.outputs.tag }}"
+          title: "Update to kDrive ${{ steps.latest.outputs.tag }}"
+          draft: ${{ steps.build.outcome != 'success' }}
+          body: |
+            Automated version bump to upstream tag `${{ steps.latest.outputs.tag }}`.
+
+            Build test in Fedora 45: **${{ steps.build.outcome }}**
+
+            ${{ steps.build.outcome != 'success' && 'The build failed, most likely because one of the patches needs a rebase. The full log is in the workflow run of this commit. Do not merge until the build passes.' || 'The package builds cleanly. Merging triggers a COPR rebuild through the project webhook.' }}
+          branch: update/kdrive-${{ steps.latest.outputs.tag }}
+          delete-branch: true
+
+      - name: Upload build log on failure
+        if: steps.cmp.outputs.update == 'yes' && steps.build.outcome != 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log-${{ steps.latest.outputs.tag }}
+          path: |
+            rpms/**/*.log
+            **/*.log
+          if-no-files-found: ignore

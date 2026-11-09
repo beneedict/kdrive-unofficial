@@ -1,0 +1,13 @@
+--- a/src/libcommongui/matomoclient.cpp	2026-09-03 10:41:42.000000000 +0200
++++ b/src/libcommongui/matomoclient.cpp	2026-11-09 20:00:35.522818016 +0100
+@@ -28,7 +28,9 @@
+     constexpr int matomoTimeout = 10000; // Timeout for Matomo requests in milliseconds
+     constexpr int matomoTimeoutMax = 2; // Max number of Matomo timeout request before disabling Matomo tracking
+     int matomoTimeoutCounter = 0; // Number of Matomo timeout requests
+-    bool matomoDisabled = false; // if true, Matomo is disabled and no events / page visit will be sent.
++    // Fedora package: Matomo tracking is disabled in this build.  No usage data is sent
++    // to analytics.infomaniak.com.
++    bool matomoDisabled = true; // if true, Matomo is disabled and no events / page visit will be sent.
+ 
+     /**
+      * Singleton instance of MatomoClient.

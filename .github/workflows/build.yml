@@ -1,0 +1,43 @@
+name: Build package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        chroot: [fedora-44-x86_64, fedora-45-x86_64, fedora-rawhide-x86_64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build SRPM
+        run: |
+          docker run --rm -v "$PWD:/work" -w /work fedora:45 bash -lc '
+            set -eu
+            dnf -y install rpmdevtools
+            ./build-srpm.sh
+          '
+
+      - name: Build RPM in mock
+        run: |
+          docker run --rm --privileged -v "$PWD:/work" -w /work \
+            -v /var/lib/mock:/var/lib/mock fedora:45 bash -lc '
+            set -eu
+            dnf -y install mock
+            srpm=$(ls -t srpms/*.src.rpm | head -n1)
+            mock -r "${{ matrix.chroot }}" --rebuild "$srpm"
+            mock -r "${{ matrix.chroot }}" --copyout /builddir/build/RPMS/*.rpm /work/rpms/ || true
+          '
+
+      - name: Upload RPMS
+        uses: actions/upload-artifact@v4
+        with:
+          name: rpms-${{ matrix.chroot }}
+          path: rpms/*.rpm
+          if-no-files-found: ignore

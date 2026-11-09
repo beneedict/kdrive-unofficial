@@ -1,0 +1,42 @@
+--- a/CMakeLists.txt	2026-09-03 10:41:42.000000000 +0200
++++ b/CMakeLists.txt	2026-11-09 22:19:56.251532510 +0100
+@@ -35,6 +35,11 @@
+ 
+ ##### Submodules
+ 
++# Fedora package: bundled libraries (utf8proc, keychain) are linked
++# statically.  Fedora's %cmake passes -DBUILD_SHARED_LIBS=ON, which would
++# otherwise apply to these subdirectories.
++set(BUILD_SHARED_LIBS OFF)
++
+ # utf8proc
+ if(UNIX)
+     set(UTF8PROC_INSTALL OFF CACHE BOOL "Disable installation of utf8proc" FORCE) # Disable installation of the libutf8proc.a static library
+@@ -47,6 +52,16 @@
+     target_compile_options(keychain PRIVATE -Wno-uninitialized)
+ endif()
+ 
++# sentry
++# Fedora ships no sentry-native.  KDRIVE_SENTRY_STUB_DIR points to the
++# no-op stub (see sentry-stub/ in the kdrive-unofficial package), which
++# provides <sentry.h> and a libsentry.a with the same symbol names.
++# The stub is linked through the regular find_library/libsentry.a lookup.
++if (DEFINED KDRIVE_SENTRY_STUB_DIR)
++    add_subdirectory("${KDRIVE_SENTRY_STUB_DIR}" sentry-stub)
++    include_directories(BEFORE "${KDRIVE_SENTRY_STUB_DIR}")
++endif()
++
+ #####
+ 
+ # Create an alias for the Qt6::Core target, used by the sentry recipe
+@@ -76,6 +91,10 @@
+ include("${CMAKE_CURRENT_LIST_DIR}/THEME.cmake")
+ 
+ set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules")
++# Fedora package: find modules for libraries that only ship pkg-config files
++if(DEFINED KDRIVE_EXTRA_MODULE_PATH)
++    list(APPEND CMAKE_MODULE_PATH "${KDRIVE_EXTRA_MODULE_PATH}")
++endif()
+ 
+ IF (WIN32)
+     SET(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH}
