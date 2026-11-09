@@ -1,6 +1,7 @@
 # Anfrage an Infomaniak (Marke und Logo)
 
-Status: **abgeschickt am 2026-11-09.**
+Status: **abgeschickt am 2026-11-09** (direkt an Infomaniak) und zusätzlich als
+GitHub-Issue: https://github.com/Infomaniak/desktop-kDrive/issues/2706
 Frist: **2026-11-23** (14 Tage). Antwort oder Fristablauf entscheidet über
 die Veröffentlichung im COPR.
 
