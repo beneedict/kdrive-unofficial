@@ -77,10 +77,13 @@ Für Fedora 44 lockert `0004-relax-sqlite-version.patch` die SQLite-Prüfung
 
 ## Getestet
 
-Fedora 45: `rpmbuild` in `mock` erfolgreich, `%check` grün, Installation im
-Chroot geprüft (`ldd` ohne fehlende Bibliotheken, `desktop-file-validate` und
-`appstream-util validate-relax` ohne Fehler). Fedora 44 und Rawhide siehe
-`build-status.log` bzw. die CI.
+| Chroot | Build | Installation | `ldd` | Desktop/Metainfo |
+|---|---|---|---|---|
+| Fedora 44 | ✅ | ✅ | ✅ | ✅ |
+| Fedora 45 | ✅ | ✅ | ✅ | ✅ |
+| Rawhide (fc46) | ✅ | ✅ | ✅ | ✅ |
+
+Details und die Befehle stehen in `docs/verification.md`.
 Bei jedem neuen Upstream-Tag (`3.x.y`, nicht `w-*` oder `m-*`) wird die
 Version in der Spec-Datei erhöht; der Merge löst über den Webhook einen
 neuen COPR-Build aus.

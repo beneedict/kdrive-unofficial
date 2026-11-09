@@ -1,2 +1,6 @@
 start fedora-45-x86_64 2026-11-09T23:05:39+01:00
 pid 134417
+end fedora-45-x86_64 status=0 2026-11-09T23:18:49+01:00
+-rw-r--r--. 1 benedikt-nimmervoll mock 45811560  9. Nov 23:06 /var/lib/mock/fedora-45-x86_64/result/kdrive-unofficial-3.8.7-1.fc45.src.rpm
+-rw-r--r--. 1 benedikt-nimmervoll mock  7844232  9. Nov 23:18 /var/lib/mock/fedora-45-x86_64/result/kdrive-unofficial-3.8.7-1.fc45.x86_64.rpm
+done 2026-11-09T23:18:49+01:00
