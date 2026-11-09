@@ -22,7 +22,9 @@ Erweiterung (`gnome-shell-extension-appindicator`).
 
 | Änderung | Grund |
 |---|---|
-| Bau gegen Qt 6, Poco, OpenSSL, SQLite und log4cplus aus Fedora | Sicherheitsupdates kommen vom Distributions-Repo, keine privaten Kopien |
+| Bau gegen Qt 6, Poco, OpenSSL, SQLite und utf8proc aus Fedora | Sicherheitsupdates kommen vom Distributions-Repo, keine privaten Kopien |
+| `keychain` und `sentry-stub` statisch eingebunden | kleine Bibliotheken ohne eigenes Fedora-Paket, keine zusätzlichen Laufzeitdateien |
+| `log4cplus` 2.1.2 privat mit `UNICODE=ON` gebaut | Fedoras `log4cplus` ist ohne Unicode gebaut, kDrive protokolliert aber Wide-Strings |
 | Sentry ersetzt durch eine No-Op-Bibliothek (`sentry-stub/`) | kein Absturzbericht an Infomaniak, kein `sentry-native`/Crashpad im Paket |
 | Matomo-Nutzungsstatistik abgeschaltet | keine Daten an `analytics.infomaniak.com` |
 | Autostart-Eintrag zeigt auf `kdrive-unofficial_client` statt auf eine AppImage | funktioniert ohne AppImage |
@@ -38,8 +40,10 @@ jeweiligen SRPM bei, das COPR zu jedem Build veröffentlicht.
 - `src/3rdparty/qtsingleapplication`, `qtlockedfile`: LGPL-2.1-only mit
   Qt-LGPL-Ausnahme 1.1 (deren Dateien werden nicht mitinstalliert, die
   Lizenztexte liegen im SRPM)
-- `src/3rdparty/utf8proc`: MIT, `src/3rdparty/qt-piwik-tracker`: MIT,
-  `src/3rdparty/keychain`: MIT
+- `src/3rdparty/utf8proc`: MIT (Quelle wird zum Bauen verwendet, zur Laufzeit
+  kommt Fedoras `utf8proc` zum Einsatz, das Poco ohnehin benötigt),
+  `src/3rdparty/qt-piwik-tracker`: MIT, `src/3rdparty/keychain`: MIT
+- `log4cplus` 2.1.2: Apache-2.0 und BSD-2-Clause
 - `sentry-stub/`: MIT
 - AppStream-Metainfo: MIT
 
@@ -68,6 +72,15 @@ das vollständige Log nach `build-<chroot>.log` und die Zusammenfassung nach
 `build-status.log`.
 
 COPR baut für `fedora-44`, `fedora-45` und `fedora-rawhide` auf x86_64.
+Für Fedora 44 lockert `0004-relax-sqlite-version.patch` die SQLite-Prüfung
+(3.51 statt 3.53), weil die Anforderung erst mit der v4-Oberfläche kam.
+
+## Getestet
+
+Fedora 45: `rpmbuild` in `mock` erfolgreich, `%check` grün, Installation im
+Chroot geprüft (`ldd` ohne fehlende Bibliotheken, `desktop-file-validate` und
+`appstream-util validate-relax` ohne Fehler). Fedora 44 und Rawhide siehe
+`build-status.log` bzw. die CI.
 Bei jedem neuen Upstream-Tag (`3.x.y`, nicht `w-*` oder `m-*`) wird die
 Version in der Spec-Datei erhöht; der Merge löst über den Webhook einen
 neuen COPR-Build aus.
