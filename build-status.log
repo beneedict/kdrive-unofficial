@@ -1,6 +1,16 @@
-start fedora-45-x86_64 2026-11-09T23:05:39+01:00
-pid 134417
-end fedora-45-x86_64 status=0 2026-11-09T23:18:49+01:00
--rw-r--r--. 1 benedikt-nimmervoll mock 45811560  9. Nov 23:06 /var/lib/mock/fedora-45-x86_64/result/kdrive-unofficial-3.8.7-1.fc45.src.rpm
--rw-r--r--. 1 benedikt-nimmervoll mock  7844232  9. Nov 23:18 /var/lib/mock/fedora-45-x86_64/result/kdrive-unofficial-3.8.7-1.fc45.x86_64.rpm
-done 2026-11-09T23:18:49+01:00
+start fedora-45-x86_64 2026-11-10T00:01:12+01:00
+pid 159708
+end fedora-45-x86_64 status=0 2026-11-10T00:21:11+01:00
+-rw-r--r--. 1 benedikt-nimmervoll mock 45826474 10. Nov 00:02 /var/lib/mock/fedora-45-x86_64/result/kdrive-unofficial-3.8.8-1.fc45.src.rpm
+-rw-r--r--. 1 benedikt-nimmervoll mock  7848102 10. Nov 00:21 /var/lib/mock/fedora-45-x86_64/result/kdrive-unofficial-3.8.8-1.fc45.x86_64.rpm
+start fedora-44-x86_64 2026-11-10T00:21:11+01:00
+pid 176861
+end fedora-44-x86_64 status=0 2026-11-10T00:43:28+01:00
+-rw-r--r--. 1 benedikt-nimmervoll mock 45826498 10. Nov 00:23 /var/lib/mock/fedora-44-x86_64/result/kdrive-unofficial-3.8.8-1.fc44.src.rpm
+-rw-r--r--. 1 benedikt-nimmervoll mock  7848463 10. Nov 00:43 /var/lib/mock/fedora-44-x86_64/result/kdrive-unofficial-3.8.8-1.fc44.x86_64.rpm
+start fedora-rawhide-x86_64 2026-11-10T00:43:28+01:00
+pid 203459
+end fedora-rawhide-x86_64 status=0 2026-11-10T00:57:59+01:00
+-rw-r--r--. 1 benedikt-nimmervoll mock 45826474 10. Nov 00:44 /var/lib/mock/fedora-rawhide-x86_64/result/kdrive-unofficial-3.8.8-1.fc46.src.rpm
+-rw-r--r--. 1 benedikt-nimmervoll mock  7857387 10. Nov 00:57 /var/lib/mock/fedora-rawhide-x86_64/result/kdrive-unofficial-3.8.8-1.fc46.x86_64.rpm
+done 2026-11-10T00:57:59+01:00

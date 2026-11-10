@@ -1,14 +1,14 @@
-# Prüfergebnisse 3.8.7-1
+# Prüfergebnisse 3.8.8-1
 
-Stand: 2026-11-09, lokal mit `mock` gebaut (`build-local.sh`).
+Stand: 2026-11-10, lokal mit `mock` gebaut (`build-local.sh`).
 
 ## Builds
 
 | Chroot | Ergebnis | RPM |
 |---|---|---|
-| `fedora-44-x86_64` | erfolgreich, `%check` grün | `kdrive-unofficial-3.8.7-1.fc44.x86_64.rpm` |
-| `fedora-45-x86_64` | erfolgreich, `%check` grün | `kdrive-unofficial-3.8.7-1.fc45.x86_64.rpm` |
-| `fedora-rawhide-x86_64` | erfolgreich (fc46, Qt 6.12, OpenSSL 4.0) | `kdrive-unofficial-3.8.7-1.fc46.x86_64.rpm` |
+| `fedora-44-x86_64` | erfolgreich, `%check` grün | `kdrive-unofficial-3.8.8-1.fc44.x86_64.rpm` |
+| `fedora-45-x86_64` | erfolgreich, `%check` grün | `kdrive-unofficial-3.8.8-1.fc45.x86_64.rpm` |
+| `fedora-rawhide-x86_64` | erfolgreich (fc46, Qt 6.12, OpenSSL 4.0) | `kdrive-unofficial-3.8.8-1.fc46.x86_64.rpm` |
 
 Jeweils ca. 13–15 Minuten Bauzeit auf 4 Threads, inklusive des privat
 gebauten `log4cplus` mit `UNICODE=ON`.
@@ -52,3 +52,11 @@ rc=124
 - Fedora 44: SQLite 3.51 statt 3.53, per Patch `0004` freigegeben
 - COPR-Projekt und Veröffentlichung erst nach Infomaniak-Antwort oder
   Ablauf der Frist (`docs/copr-setup.md`, `docs/upstream-inquiry.md`)
+
+## Update-Verhalten (3.8.8.1)
+
+- `0005-package-managed-updates.patch` ist im Build enthalten.
+- Der Client startet mit Version `3.8.8.1` (siehe
+  `~/.local/state/kDrive/logs/*_kDrive_client.log.0`).
+- Es erscheint kein Hinweis mehr auf eine AppImage; der Updater meldet
+  `UpToDate`, ohne den Infomaniak-Endpunkt abzufragen.
