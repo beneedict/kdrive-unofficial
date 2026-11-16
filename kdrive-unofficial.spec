@@ -2,7 +2,7 @@
 %global         _hardened_build 1
 
 Name:           kdrive-unofficial
-Version:        3.8.8
+Version:        4.0.3
 Release:        1%{?dist}
 Summary:        Unofficial build of the Infomaniak kDrive desktop sync client
 License:        GPL-3.0-or-later AND MIT AND Apache-2.0 AND BSD-2-Clause
@@ -152,6 +152,8 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/io.github.bene
 %{_datadir}/kDrive_client
 
 %changelog
+* Mon Nov 16 2026 Benedikt Nimmervoll <beneedict@users.noreply.github.com> - 4.0.3-1
+- Update to kDrive 4.0.3.
 * Tue Nov 10 2026 Benedikt Nimmervoll <beneedict@users.noreply.github.com> - 3.8.8-1
 - Update to kDrive 3.8.8.1.
 - New patch: no update check against Infomaniak, updates are delivered by dnf.
