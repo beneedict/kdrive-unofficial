@@ -1,9 +1,12 @@
-# COPR-Einrichtung (noch nicht ausgeführt)
+# COPR-Einrichtung
+
+Stand: **2026-11-19 eingerichtet.** GitHub-Repo und COPR-Projekt sind
+öffentlich: https://copr.fedorainfracloud.org/coprs/beneedict/kdrive-unofficial/
 
 Voraussetzungen:
 
 - COPR-Token in `~/.config/copr`
-- GitHub-Repo `beneedict/kdrive-unofficial` (existiert, derzeit privat)
+- GitHub-Repo `beneedict/kdrive-unofficial` (öffentlich)
 
 ## 1. Projekt anlegen
 
@@ -48,11 +51,13 @@ In GitHub unter *Settings → Webhooks* eintragen, Ereignis: Push.
 copr-cli build-package kdrive-unofficial --name kdrive-unofficial
 ```
 
-## 5. Veröffentlichen
+## 5. Veröffentlichung
 
-Freigabe liegt vor (Infomaniak, 2026-11-19, siehe
+Die Markenfreigabe liegt vor (Infomaniak, 2026-11-19, siehe
 `docs/upstream-inquiry.md`). Die drei Auflagen — inoffiziell, kein Support,
-Markenhinweis — sind in README, Spec und COPR-Beschreibung erfüllt:
+Markenhinweis — sind in README, Spec, Desktop-Eintrag und COPR-Beschreibung
+erfüllt. GitHub-Repo und COPR-Projekt wurden am 2026-11-19 öffentlich
+geschaltet:
 
 ```bash
 gh repo edit beneedict/kdrive-unofficial --visibility public --accept-visibility-change-consequences
