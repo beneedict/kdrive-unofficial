@@ -1,12 +1,11 @@
 # Anfrage an Infomaniak (Marke und Logo)
 
-Status: **freigegeben**. Infomaniak hat die Nutzung von Name und Icons
-genehmigt (Antwort per E-Mail, hier eingetragen am 2026-11-19).
+Status: **freigegeben**. Infomaniak hat die Nutzung von Name und Icons am
+2026-11-19 genehmigt — öffentlich im GitHub-Issue (Kommentar von
+`FabianDevel`, der das Issue damit geschlossen hat) und zusätzlich per
+E-Mail: https://github.com/Infomaniak/desktop-kDrive/issues/2706#issuecomment-7015038005
 
-Die Anfrage war am 2026-11-09 zusätzlich als GitHub-Issue veröffentlicht
-worden (https://github.com/Infomaniak/desktop-kDrive/issues/2706); die
-Freigabe kam über den Mailweg. Die ursprüngliche Frist von 14 Tagen
-(2026-11-23) ist damit gegenstandslos.
+Die ursprüngliche Frist von 14 Tagen (2026-11-23) ist damit gegenstandslos.
 
 ## Antwort von Infomaniak
 
@@ -29,9 +28,9 @@ Damit sind drei Auflagen verbunden. Wo sie erfüllt sind:
 
 | Auflage | Umsetzung |
 |---|---|
-| Paket ist inoffiziell | README („Dieses Paket ist nicht offiziell“), Spec-`Summary`/`%description` („Unofficial build“), AppStream-Metainfo, COPR-Beschreibung |
+| Paket ist inoffiziell | README („Dieses Paket ist nicht offiziell“), Spec-`Summary`/`%description` („Unofficial build“), Desktop-Eintrag („kDrive (unofficial)“), AppStream-Metainfo, COPR-Beschreibung |
 | Kein Support durch Infomaniak | README, Spec-`%description`, AppStream-Metainfo, COPR-Beschreibung („not supported by Infomaniak“); Fehlermeldungen gehen an dieses Repo |
-| Markenhinweis | „kDrive is a trademark of Infomaniak Network SA“ in README, Spec, AppStream-Metainfo, COPR-Beschreibung |
+| Markenhinweis | „kDrive is a trademark of Infomaniak Network SA“ in README, Spec, AppStream-Metainfo, COPR-Beschreibung und `TRADEMARK_NOTICE.md` |
 
 ## Ursprüngliche Anfrage (2026-11-09)
 

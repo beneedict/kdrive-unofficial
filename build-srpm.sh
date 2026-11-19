@@ -13,6 +13,7 @@ trap 'rm -rf "$stage"' EXIT
 
 # Local files referenced by the spec
 cp "$here"/io.github.beneedict.kdrive_unofficial.metainfo.xml "$stage"/
+cp "$here"/TRADEMARK_NOTICE.md "$stage"/
 cp "$here"/*.patch "$stage"/
 tar czf "$stage/sentry-stub.tar.gz" -C "$here" sentry-stub
 tar czf "$stage/cmake-modules.tar.gz" -C "$here" cmake-modules

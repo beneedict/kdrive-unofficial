@@ -4,7 +4,8 @@ Inoffizieller RPM-Build von [Infomaniak desktop-kDrive](https://github.com/Infom
 für Fedora, gebaut mit COPR.
 
 **Dieses Paket ist nicht offiziell und wird von Infomaniak nicht unterstützt.**
-kDrive ist eine Marke der Infomaniak Network SA.
+kDrive ist eine Marke der Infomaniak Network SA. Die vollständigen Hinweise
+stehen in [TRADEMARK_NOTICE.md](TRADEMARK_NOTICE.md).
 
 Infomaniak hat die Nutzung von Name und Icons für dieses Paket am 2026-11-19
 ausdrücklich freigegeben, unter den Bedingungen, die hier genannt sind:
@@ -33,7 +34,7 @@ Erweiterung (`gnome-shell-extension-appindicator`).
 | Sentry ersetzt durch eine No-Op-Bibliothek (`sentry-stub/`) | kein Absturzbericht an Infomaniak, kein `sentry-native`/Crashpad im Paket |
 | Matomo-Nutzungsstatistik abgeschaltet | keine Daten an `analytics.infomaniak.com` |
 | Update-Prüfung abgeschaltet (`0005`) | keine Abfrage des Infomaniak-Endpunkts, kein Hinweis auf eine AppImage; Updates kommen aus COPR via `dnf upgrade` |
-| Autostart-Eintrag zeigt auf `kdrive-unofficial_client` statt auf eine AppImage | funktioniert ohne AppImage |
+| Autostart-Eintrag startet `kDrive` wie der Desktop-Eintrag statt einer AppImage | funktioniert ohne AppImage, der Client bekommt den Kommunikations-Port |
 | Desktop-Datei, Icon und AppStream-Metainfo unter `/usr/share` | Integration in GNOME Software und das App-Grid |
 
 Die Änderungen sind als Patches in `patches/` abgelegt und jeweils im
@@ -96,6 +97,7 @@ neuen COPR-Build aus.
 
 ## Fehler melden
 
-Bitte im [Issue-Tracker dieses Repos](https://github.com/beneedict/kdrive-unofficial/issues),
+Infomaniak bietet für dieses Paket keinen Support. Bitte melde Fehler im
+[Issue-Tracker dieses Repos](https://github.com/beneedict/kdrive-unofficial/issues),
 nicht bei Infomaniak. Fehler, die auch in der offiziellen AppImage auftreten,
 können zusätzlich upstream gemeldet werden.

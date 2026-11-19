@@ -3,7 +3,7 @@
 
 Name:           kdrive-unofficial
 Version:        3.8.8
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Unofficial build of the Infomaniak kDrive desktop sync client
 License:        GPL-3.0-or-later AND MIT AND Apache-2.0 AND BSD-2-Clause
 URL:            https://github.com/Infomaniak/desktop-kDrive
@@ -20,12 +20,15 @@ Source5:        sentry-stub.tar.gz
 Source6:        cmake-modules.tar.gz
 # Fedora's log4cplus is built without UNICODE support, kDrive needs it
 Source7:        https://github.com/log4cplus/log4cplus/releases/download/REL_2_1_2/log4cplus-2.1.2.tar.gz
+Source8:        TRADEMARK_NOTICE.md
 
 Patch0:         0001-sentry-stub.patch
 Patch1:         0002-disable-matomo.patch
 Patch2:         0003-autostart-without-appimage.patch
 Patch3:         0004-relax-sqlite-version.patch
 Patch4:         0005-package-managed-updates.patch
+# Kennzeichnet das Paket auch im App-Menü als inoffiziell.
+Patch5:         0006-desktop-name-unofficial.patch
 
 # kDrive is built from source against the Qt 6 packages of Fedora
 BuildRequires:  cmake
@@ -69,13 +72,15 @@ cloud storage of Infomaniak.
 
 This is an unofficial build for Fedora.  It is compiled from the upstream
 GPL-3.0-or-later sources and is not supported by Infomaniak.  kDrive is a
-trademark of Infomaniak Network SA.
+trademark of Infomaniak Network SA.  The name and application icons are used
+with Infomaniak's permission for this unofficial package; see
+TRADEMARK_NOTICE.md for details.
 
 Differences from the upstream AppImage:
   * built against the system Qt 6, Poco, OpenSSL and SQLite libraries
   * crash reporting (Sentry) removed, no telemetry library is shipped
   * usage statistics (Matomo) disabled
-  * the autostart entry points at the installed client instead of an AppImage
+  * the autostart entry points at the installed kDrive binary instead of an AppImage
   * desktop integration is installed to /usr/share
 
 %prep
@@ -86,6 +91,9 @@ tar xf %{SOURCE3} --strip-components=1 -C src/3rdparty/qt-piwik-tracker
 tar xf %{SOURCE5}
 tar xf %{SOURCE6}
 tar xf %{SOURCE7}
+# %doc resolves relative to the build directory, so the packaging notice has to
+# be copied next to the upstream files from the tarball.
+cp -p %{SOURCE8} .
 
 %build
 # Fedora's log4cplus-devel is compiled without UNICODE support, but kDrive
@@ -142,7 +150,7 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/io.github.bene
 
 %files
 %license %{_licensedir}/%{name}/*
-%doc README.md THIRD_PARTY_NOTICES.md
+%doc README.md THIRD_PARTY_NOTICES.md TRADEMARK_NOTICE.md
 %{_bindir}/kDrive
 %{_bindir}/kDrive_client
 %{_bindir}/sync-exclude.lst
@@ -152,6 +160,10 @@ appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/io.github.bene
 %{_datadir}/kDrive_client
 
 %changelog
+* Thu Nov 19 2026 Benedikt Nimmervoll <beneedict@users.noreply.github.com> - 3.8.8-2
+- Markenfreigabe von Infomaniak dokumentiert (TRADEMARK_NOTICE.md).
+- App-Menüeintrag als "kDrive (unofficial)" gekennzeichnet.
+- Paketbeschreibung nennt die Freigabe von Name und Icon.
 * Tue Nov 10 2026 Benedikt Nimmervoll <beneedict@users.noreply.github.com> - 3.8.8-1
 - Update to kDrive 3.8.8.1.
 - New patch: no update check against Infomaniak, updates are delivered by dnf.

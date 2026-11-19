@@ -1,0 +1,34 @@
+--- a/kdrive.desktop.in
++++ b/kdrive.desktop.in
+@@ -4,7 +4,7 @@
+ Exec=@APPLICATION_EXECUTABLE@
+ Comment=@APPLICATION_NAME@ desktop synchronization client
+ GenericName=Folder Sync
+-Name=@APPLICATION_NAME@
++Name=@APPLICATION_NAME@ (unofficial)
+ Icon=@APPLICATION_ICON_NAME@
+ Keywords=@APPLICATION_NAME@;syncing;file;sharing;
+ X-GNOME-Autostart-Delay=3
+@@ -14,17 +14,17 @@
+ # Translations
+ Comment[de]=@APPLICATION_NAME@ Desktop-Synchronisationsclient
+ GenericName[de]=Ordner-Synchronisation
+-Name[de]=@APPLICATION_NAME@
++Name[de]=@APPLICATION_NAME@ (inoffiziell)
+ Icon[de]=@APPLICATION_ICON_NAME@
+ Comment[es]=@APPLICATION_NAME@ cliente de sincronización de escritorio
+ GenericName[es]=Sincronización de carpeta
+-Name[es]=@APPLICATION_NAME@
++Name[es]=@APPLICATION_NAME@ (no oficial)
+ Icon[es]=@APPLICATION_ICON_NAME@
+ Comment[fr]=Client de synchronisation @APPLICATION_NAME@
+ GenericName[fr]=Synchronisation de dossier
+-Name[fr]=@APPLICATION_NAME@
++Name[fr]=@APPLICATION_NAME@ (non officiel)
+ Icon[fr]=@APPLICATION_ICON_NAME@
+ Comment[it]=Client di sincronizzazione del desktop di @APPLICATION_NAME@
+ GenericName[it]=Sincronizzazione cartella
+-Name[it]=@APPLICATION_NAME@
++Name[it]=@APPLICATION_NAME@ (non ufficiale)
+ Icon[it]=@APPLICATION_ICON_NAME@
+\ No newline at end of file
