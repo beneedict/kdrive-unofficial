@@ -50,7 +50,9 @@ copr-cli build-package kdrive-unofficial --name kdrive-unofficial
 
 ## 5. Veröffentlichen
 
-Erst nach Antwort von Infomaniak oder Ablauf der 14-Tage-Frist:
+Freigabe liegt vor (Infomaniak, 2026-11-19, siehe
+`docs/upstream-inquiry.md`). Die drei Auflagen — inoffiziell, kein Support,
+Markenhinweis — sind in README, Spec und COPR-Beschreibung erfüllt:
 
 ```bash
 gh repo edit beneedict/kdrive-unofficial --visibility public --accept-visibility-change-consequences

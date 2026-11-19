@@ -50,8 +50,9 @@ rc=124
 ## Offen
 
 - Fedora 44: SQLite 3.51 statt 3.53, per Patch `0004` freigegeben
-- COPR-Projekt und Veröffentlichung erst nach Infomaniak-Antwort oder
-  Ablauf der Frist (`docs/copr-setup.md`, `docs/upstream-inquiry.md`)
+- Markenfrage geklärt: Infomaniak hat Name und Icons am 2026-11-19
+  freigegeben (`docs/upstream-inquiry.md`); COPR-Projekt und Veröffentlichung
+  sind damit frei (`docs/copr-setup.md`)
 
 ## Update-Verhalten (3.8.8.1)
 

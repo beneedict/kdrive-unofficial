@@ -6,6 +6,11 @@ für Fedora, gebaut mit COPR.
 **Dieses Paket ist nicht offiziell und wird von Infomaniak nicht unterstützt.**
 kDrive ist eine Marke der Infomaniak Network SA.
 
+Infomaniak hat die Nutzung von Name und Icons für dieses Paket am 2026-11-19
+ausdrücklich freigegeben, unter den Bedingungen, die hier genannt sind:
+inoffizieller Status, kein Support, Markenhinweis
+(siehe `docs/upstream-inquiry.md`).
+
 ## Installation
 
 ```bash

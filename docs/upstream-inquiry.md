@@ -1,14 +1,42 @@
 # Anfrage an Infomaniak (Marke und Logo)
 
-Status: **abgeschickt am 2026-11-09** (direkt an Infomaniak) und zusätzlich als
-GitHub-Issue: https://github.com/Infomaniak/desktop-kDrive/issues/2706
-Frist: **2026-11-23** (14 Tage). Antwort oder Fristablauf entscheidet über
-die Veröffentlichung im COPR.
+Status: **freigegeben**. Infomaniak hat die Nutzung von Name und Icons
+genehmigt (Antwort per E-Mail, hier eingetragen am 2026-11-19).
+
+Die Anfrage war am 2026-11-09 zusätzlich als GitHub-Issue veröffentlicht
+worden (https://github.com/Infomaniak/desktop-kDrive/issues/2706); die
+Freigabe kam über den Mailweg. Die ursprüngliche Frist von 14 Tagen
+(2026-11-23) ist damit gegenstandslos.
+
+## Antwort von Infomaniak
+
+> Hello,
+>
+> First, thank you for your trademark inquiry and your willingness to
+> contribute to our application.
+>
+> After validation from our compliance team, you may use the name and icon
+> and proceed with your package, as long as you explicitly mention that:
+>
+> your .rpm package is unofficial,
+> we do not offer support for it,
+> you include the trademark notice.
+> In fine, exactly what you described in this issue.
+>
+> Have a great day, and thanks again.
+
+Damit sind drei Auflagen verbunden. Wo sie erfüllt sind:
+
+| Auflage | Umsetzung |
+|---|---|
+| Paket ist inoffiziell | README („Dieses Paket ist nicht offiziell“), Spec-`Summary`/`%description` („Unofficial build“), AppStream-Metainfo, COPR-Beschreibung |
+| Kein Support durch Infomaniak | README, Spec-`%description`, AppStream-Metainfo, COPR-Beschreibung („not supported by Infomaniak“); Fehlermeldungen gehen an dieses Repo |
+| Markenhinweis | „kDrive is a trademark of Infomaniak Network SA“ in README, Spec, AppStream-Metainfo, COPR-Beschreibung |
+
+## Ursprüngliche Anfrage (2026-11-09)
 
 Ziel: Einverständnis für Name „kDrive“ und die mitgelieferten App-Icons in
 einem inoffiziellen Fedora-Paket.
-
----
 
 **Subject: Unofficial Fedora COPR package of kDrive Desktop – trademark question**
 
