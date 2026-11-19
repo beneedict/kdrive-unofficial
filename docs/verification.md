@@ -1,8 +1,30 @@
-# Prüfergebnisse 3.8.8-1
+# Prüfergebnisse
+
+## COPR-Build 3.8.8-2 (2026-11-19)
+
+Build [11362240](https://copr.fedorainfracloud.org/coprs/build/11362240)
+war für alle drei Chroots erfolgreich:
+
+| Chroot | Ergebnis | RPM |
+|---|---|---|
+| `fedora-44-x86_64` | erfolgreich | `kdrive-unofficial-3.8.8-2.fc44.x86_64.rpm` |
+| `fedora-45-x86_64` | erfolgreich | `kdrive-unofficial-3.8.8-2.fc45.x86_64.rpm` |
+| `fedora-rawhide-x86_64` | erfolgreich (fc46) | `kdrive-unofficial-3.8.8-2.fc46.x86_64.rpm` |
+
+Geprüft am heruntergeladenen Fedora-45-RPM:
+
+- `/usr/share/doc/kdrive-unofficial/TRADEMARK_NOTICE.md` ist enthalten.
+- Der Desktop-Eintrag heißt `kDrive (unofficial)` bzw. `kDrive (inoffiziell)`.
+- `%description` nennt den inoffiziellen Status, den fehlenden Support und
+  den Markenhinweis.
+
+Der Build dauerte rund 13 Minuten.
+
+## Lokale Prüfung 3.8.8-1
 
 Stand: 2026-11-10, lokal mit `mock` gebaut (`build-local.sh`).
 
-## Builds
+### Builds
 
 | Chroot | Ergebnis | RPM |
 |---|---|---|
@@ -51,8 +73,8 @@ rc=124
 
 - Fedora 44: SQLite 3.51 statt 3.53, per Patch `0004` freigegeben
 - Markenfrage geklärt: Infomaniak hat Name und Icons am 2026-11-19
-  freigegeben (`docs/upstream-inquiry.md`); COPR-Projekt und Veröffentlichung
-  sind damit frei (`docs/copr-setup.md`)
+  freigegeben (`docs/upstream-inquiry.md`). COPR-Projekt, GitHub-Repo und
+  Build 3.8.8-2 sind veröffentlicht (`docs/copr-setup.md`).
 
 ## Update-Verhalten (3.8.8.1)
 

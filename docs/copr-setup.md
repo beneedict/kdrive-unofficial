@@ -36,20 +36,40 @@ copr-cli add-package-scm kdrive-unofficial \
 `--method make_srpm` nutzt `.copr/Makefile` aus dem Repo; dort werden die
 Quellen per `spectool` geladen und die Hilfs-Tarballs erzeugt.
 
-## 3. Webhook (optional, für Rebuild nach Merge)
+## 3. Webhook (Rebuild nach Push)
 
 ```bash
-copr-cli get-package kdrive-unofficial --name kdrive-unofficial
-# Webhook-URL steht in der Ausgabe unter "webhook_rebuild"
+# erzeugt ein neues Token und gibt es aus
+copr-cli new-webhook-secret kdrive-unofficial
 ```
 
-In GitHub unter *Settings → Webhooks* eintragen, Ereignis: Push.
+Die Webhook-URL hat die Form
+
+```
+https://copr.fedorainfracloud.org/webhooks/github/<token>/beneedict/kdrive-unofficial/
+```
+
+Eingetragen in GitHub unter *Settings → Webhooks* (Ereignis: `push`,
+Content-Type `application/json`) bzw. per API:
+
+```bash
+gh api repos/beneedict/kdrive-unofficial/hooks -X POST \
+    -f name=web -F active=true -f "events[]=push" \
+    -f "config[url]=https://copr.fedorainfracloud.org/webhooks/github/<token>/beneedict/kdrive-unofficial/" \
+    -f "config[content_type]=json" -f "config[insecure_ssl]=0"
+```
+
+Das Token steht nicht in `copr-cli get-package`; es ist nur über
+`new-webhook-secret` (neu erzeugen) oder die COPR-Weboberfläche sichtbar.
 
 ## 4. Erster Build
 
 ```bash
 copr-cli build-package kdrive-unofficial --name kdrive-unofficial
 ```
+
+Build [11362240](https://copr.fedorainfracloud.org/coprs/build/11362240)
+war am 2026-11-19 für Fedora 44, 45 und Rawhide erfolgreich.
 
 ## 5. Veröffentlichung
 
