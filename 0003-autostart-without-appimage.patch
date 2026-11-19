@@ -1,16 +1,16 @@
---- a/src/libcommonserver/utility/utility_linux.cpp	2026-09-03 10:41:42.000000000 +0200
-+++ b/src/libcommonserver/utility/utility_linux.cpp	2026-11-09 21:12:58.109997795 +0100
+--- a/src/libcommonserver/utility/utility_linux.cpp	2026-09-28 15:36:42.000000000 +0200
++++ b/src/libcommonserver/utility/utility_linux.cpp	2026-11-10 07:32:10.521034316 +0100
 @@ -223,12 +223,22 @@
          }
          const SyncPath appimageDir{CommonUtility::envVarValue("APPIMAGE")};
          LOGW_DEBUG(logger(), L"APPIMAGE: " << Utility::formatSyncPath(appimageDir));
 +        // In an AppImage the client is started through the AppImage file itself.  In a
 +        // regular installation (RPM, DEB, ...) there is no AppImage, so the Exec key must
-+        // point at the installed client executable, otherwise the autostart entry is
-+        // broken.
++        // point at the installed server executable, which launches the client with the
++        // communication port, just like the desktop entry does.
 +        QString execPath;
 +        if (appimageDir.empty()) {
-+            execPath = QStringLiteral(APPLICATION_CLIENT_EXECUTABLE);
++            execPath = QStringLiteral(APPLICATION_EXECUTABLE);
 +        } else {
 +            execPath = QString::fromStdString(appimageDir.native());
 +        }
